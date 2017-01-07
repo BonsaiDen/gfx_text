@@ -491,12 +491,17 @@ impl<R: Resources, F: Factory<R>> Renderer<R, F> {
         try!(self.prepare_pso(T::get_format()));
         let pso = &self.pso_map[&T::get_format()];
 
+        encoder.draw(&slice, pso, &data);
+        Ok(())
+    }
+
+    /// Clear any previously added text.
+    pub fn reset(&mut self) {
+
         // Clear state.
         self.vertex_data.clear();
         self.index_data.clear();
 
-        encoder.draw(&slice, pso, &data);
-        Ok(())
     }
 
     // TODO: Currently reports height based on the tallest glyph in the string.

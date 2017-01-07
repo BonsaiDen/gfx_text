@@ -54,6 +54,13 @@ fn main() {
 
     let mut counter: u32 = 0;
     let mut events = window.events();
+    events.set_ups(30);
+    events.set_max_fps(60);
+
+    big_text.add("The big brown fox jumps over the lazy dog", [50, 50], BROWN);
+
+    custom_font_text.add("The custom blue fox jumps over the lazy dog", [10, 80], BLUE);
+    custom_font_text.add_anchored("I live in the bottom right", [639, 479], HorizontalAnchor::Right, VerticalAnchor::Bottom, RED);
 
     'main: loop {
         for event in events.next(&mut window) {
@@ -62,15 +69,11 @@ fn main() {
 
                     counter += 1;
 
+                    normal_text.reset();
                     normal_text.add("The quick brown fox jumps over the lazy dog", [10, 10], BROWN);
                     normal_text.add("The quick red fox jumps over the lazy dog", [30, 30], RED);
                     normal_text.add_anchored("hello centred world", [320, 240], HorizontalAnchor::Center, VerticalAnchor::Center, BLUE);
                     normal_text.add_anchored(&format!("Count: {}", counter), [0, 479], HorizontalAnchor::Left, VerticalAnchor::Bottom, BLUE);
-
-                    big_text.add("The big brown fox jumps over the lazy dog", [50, 50], BROWN);
-
-                    custom_font_text.add("The custom blue fox jumps over the lazy dog", [10, 80], BLUE);
-                    custom_font_text.add_anchored("I live in the bottom right", [639, 479], HorizontalAnchor::Right, VerticalAnchor::Bottom, RED);
 
                     encoder.clear(&main_color, WHITE);
 
